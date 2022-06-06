@@ -21,4 +21,4 @@ The mentioned dashboard includes the following item:
 In the pictures below, you can see the dashboard visualizations:
 ![image](https://user-images.githubusercontent.com/43276746/172161239-28cdf6ca-5508-4b25-a9cb-21c9361de346.png)
 ![image](https://user-images.githubusercontent.com/43276746/172160329-6c4bc997-12b6-460a-8366-090bfd68d355.png)
-![image](https://user-images.githubusercontent.com/43276746/172161032-352b2d8c-6838-41b2-9d8c-851c742716ad.png)
+![image](https://user-images.githubusercontent.com/43276746/172161564-317c8e18-5c82-4aa5-b0b7-22b6a4c11801.png)
