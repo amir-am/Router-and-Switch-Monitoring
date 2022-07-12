@@ -14,14 +14,14 @@ The mentioned dashboard includes the following item:
 - CPU Usage
 - Memory Usage
 - Input / Output Data Rate
-- Errors
-- Discards
-- Port Summary
+- Port Summary (Name, Index, Alias, Status, IP Address, Network Mask, Bandwidth, Type, In Errors, Out Errors)
 
 In the pictures below, you can see the dashboard visualizations:
-![image](https://user-images.githubusercontent.com/43276746/172161239-28cdf6ca-5508-4b25-a9cb-21c9361de346.png)
-![image](https://user-images.githubusercontent.com/43276746/172160329-6c4bc997-12b6-460a-8366-090bfd68d355.png)
-![image](https://user-images.githubusercontent.com/43276746/172161564-317c8e18-5c82-4aa5-b0b7-22b6a4c11801.png)
+![image](https://user-images.githubusercontent.com/43276746/178444483-7cf863a2-3af5-4c9b-bfdd-bb367a5f4854.png)
+![image](https://user-images.githubusercontent.com/43276746/178444649-03fab14f-4246-4440-a495-d7246e71372e.png)
+![image](https://user-images.githubusercontent.com/43276746/178444945-299d39c8-0096-4ad1-a365-1320509a30d1.png)
+![image](https://user-images.githubusercontent.com/43276746/178445059-51c4339b-3004-4550-a214-ded6d839e919.png)
+
 
 Requirements:
 - Grafana: https://grafana.com/grafana/download
