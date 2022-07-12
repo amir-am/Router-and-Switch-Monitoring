@@ -22,6 +22,7 @@ Stackwise [Switches Only]
 - Stack Power Info (Name, Type, Mode)
 
 In the pictures below, you can see the dashboard visualizations:
+
 ![image](https://user-images.githubusercontent.com/43276746/178444483-7cf863a2-3af5-4c9b-bfdd-bb367a5f4854.png)
 ![image](https://user-images.githubusercontent.com/43276746/178444649-03fab14f-4246-4440-a495-d7246e71372e.png)
 ![image](https://user-images.githubusercontent.com/43276746/178444945-299d39c8-0096-4ad1-a365-1320509a30d1.png)
