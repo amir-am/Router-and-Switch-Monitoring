@@ -16,6 +16,12 @@ The mentioned dashboard includes the following item:
 - Input / Output Data Rate
 - Port Summary (Name, Index, Alias, Status, IP Address, Network Mask, Bandwidth, Type, In Errors, Out Errors)
 
+[Switches Only]
+Stackwise
+- Switch Info (Number, Role, Power Budget, Power Allocated, State)
+- Stack Port Info (Index, Neighbor, Oper Status)
+- Stack Power Info (Name, Type, Mode)
+
 In the pictures below, you can see the dashboard visualizations:
 ![image](https://user-images.githubusercontent.com/43276746/178444483-7cf863a2-3af5-4c9b-bfdd-bb367a5f4854.png)
 ![image](https://user-images.githubusercontent.com/43276746/178444649-03fab14f-4246-4440-a495-d7246e71372e.png)
