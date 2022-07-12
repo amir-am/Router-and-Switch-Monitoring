@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.4.6"
+      "version": "8.5.4"
     },
     {
       "type": "datasource",
@@ -37,12 +37,6 @@
     },
     {
       "type": "panel",
-      "id": "table-old",
-      "name": "Table (old)",
-      "version": ""
-    },
-    {
-      "type": "panel",
       "id": "timeseries",
       "name": "Time series",
       "version": ""
@@ -52,7 +46,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -81,6 +78,7 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "An administratively-assigned name for this managed node. By convention, this is the node's fully-qualified domain name. If the name is unknown, the value is the zero-length string",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -99,7 +97,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
+                "color": "dark-blue",
                 "value": null
               }
             ]
@@ -131,7 +129,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "alias": "Hostname",
@@ -149,7 +147,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "YOUR-NAME",
+          "measurement": "switch-core",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"uptime\") FROM \"snmp\" WHERE (\"host\" = 'telegraf') AND $timeFilter GROUP BY time(1m), \"hostname\" fill(null)",
@@ -181,6 +179,7 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "The time (in hundredths of a second) since the network management portion of the system was last re-initialized",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -199,7 +198,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow",
+                "color": "dark-yellow",
                 "value": null
               }
             ]
@@ -231,7 +230,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "alias": "Uptime",
@@ -249,7 +248,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "YOUR-NAME",
+          "measurement": "switch-core",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"uptime\") FROM \"snmp\" WHERE (\"host\" = 'telegraf') AND $timeFilter GROUP BY time(1m), \"hostname\" fill(null)",
@@ -286,6 +285,7 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "The table of power supply status maintained by the environmental monitor card",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -295,38 +295,39 @@
           "custom": {
             "align": "auto",
             "displayMode": "color-text",
-            "filterable": false
+            "filterable": false,
+            "inspect": false
           },
           "mappings": [
             {
               "options": {
                 "1": {
-                  "color": "green",
+                  "color": "dark-green",
                   "index": 0,
                   "text": "Normal"
                 },
                 "2": {
-                  "color": "orange",
+                  "color": "dark-orange",
                   "index": 1,
                   "text": "Warning"
                 },
                 "3": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 2,
                   "text": "Critical"
                 },
                 "4": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 3,
                   "text": "Shutdown"
                 },
                 "5": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 4,
                   "text": "Not Present"
                 },
                 "6": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 5,
                   "text": "Not Functioning"
                 }
@@ -357,27 +358,27 @@
                   {
                     "options": {
                       "1": {
-                        "color": "red",
+                        "color": "dark-red",
                         "index": 0,
                         "text": "Unknown"
                       },
                       "2": {
-                        "color": "green",
+                        "color": "dark-green",
                         "index": 1,
                         "text": "AC"
                       },
                       "3": {
-                        "color": "yellow",
+                        "color": "dark-yellow",
                         "index": 2,
                         "text": "DC"
                       },
                       "4": {
-                        "color": "yellow",
+                        "color": "dark-yellow",
                         "index": 3,
                         "text": "External Power Supply"
                       },
                       "5": {
-                        "color": "yellow",
+                        "color": "dark-yellow",
                         "index": 4,
                         "text": "Internal Redundant"
                       }
@@ -385,13 +386,6 @@
                     "type": "value"
                   }
                 ]
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "yellow",
-                  "mode": "fixed"
-                }
               }
             ]
           }
@@ -416,7 +410,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "groupBy": [
@@ -434,7 +428,7 @@
             }
           ],
           "hide": false,
-          "measurement": "YOUR-NAME",
+          "measurement": "switch-core",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
@@ -516,6 +510,7 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "An entry in the ambient temperature status table, representing the status of the associated testpoint maintained by the environmental monitor",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -525,7 +520,8 @@
           "custom": {
             "align": "auto",
             "displayMode": "color-text",
-            "filterable": false
+            "filterable": false,
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -549,7 +545,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "red",
+                  "fixedColor": "dark-red",
                   "mode": "fixed"
                 }
               }
@@ -564,7 +560,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "green",
+                  "fixedColor": "dark-green",
                   "mode": "fixed"
                 }
               }
@@ -591,7 +587,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "groupBy": [
@@ -609,7 +605,7 @@
             }
           ],
           "hide": false,
-          "measurement": "YOUR-NAME",
+          "measurement": "switch-core",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
@@ -700,6 +696,7 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "An entry in the fan status table, representing the status of the associated fan maintained by the environmental monitor",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -709,38 +706,39 @@
           "custom": {
             "align": "auto",
             "displayMode": "color-text",
-            "filterable": false
+            "filterable": false,
+            "inspect": false
           },
           "mappings": [
             {
               "options": {
                 "1": {
-                  "color": "green",
+                  "color": "dark-green",
                   "index": 0,
                   "text": "Normal"
                 },
                 "2": {
-                  "color": "orange",
+                  "color": "dark-orange",
                   "index": 1,
                   "text": "Warning"
                 },
                 "3": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 2,
                   "text": "Critical"
                 },
                 "4": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 3,
                   "text": "Shutdown"
                 },
                 "5": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 4,
                   "text": "Not Present"
                 },
                 "6": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 5,
                   "text": "Not Functioning"
                 }
@@ -779,7 +777,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
           "groupBy": [
@@ -797,7 +795,7 @@
             }
           ],
           "hide": false,
-          "measurement": "YOUR-NAME",
+          "measurement": "switch-core",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
@@ -864,16 +862,12 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "A textual description of the entity. This value should include the full name and version identification of the system's hardware type, software operating-system, and networking software",
       "fieldConfig": {
         "defaults": {
           "color": {
             "fixedColor": "orange",
             "mode": "fixed"
-          },
-          "custom": {
-            "align": "auto",
-            "displayMode": "color-text",
-            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -896,31 +890,38 @@
       },
       "id": 35,
       "options": {
-        "footer": {
-          "fields": "",
-          "reducer": [
-            "sum"
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
           ],
-          "show": false
+          "fields": "/.*/",
+          "values": false
         },
-        "frameIndex": 0,
-        "showHeader": false,
-        "sortBy": []
+        "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.5.4",
       "targets": [
         {
+          "alias": "OS Version",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
           "groupBy": [],
           "hide": false,
           "limit": "",
-          "measurement": "YOUR-NAME",
+          "measurement": "switch-core",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
           "queryType": "randomWalk",
           "rawQuery": false,
           "refId": "A",
-          "resultFormat": "table",
+          "resultFormat": "time_series",
           "select": [
             [
               {
@@ -945,13 +946,13 @@
           "options": {
             "include": {
               "names": [
-                "last"
+                "OS Version"
               ]
             }
           }
         }
       ],
-      "type": "table"
+      "type": "stat"
     },
     {
       "alert": {
@@ -1006,14 +1007,19 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "CPU alert",
+        "name": "Switch Core CPU alert",
         "noDataState": "ok",
-        "notifications": []
+        "notifications": [
+          {
+            "uid": "NQFdum6Zk"
+          }
+        ]
       },
       "datasource": {
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "A table of overall CPU statistics",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1130,7 +1136,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "YOUR-NAME",
+          "measurement": "switch-core",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1195,14 +1201,19 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "Memory alert",
+        "name": "Switch Core Memory alert",
         "noDataState": "ok",
-        "notifications": []
+        "notifications": [
+          {
+            "uid": "NQFdum6Zk"
+          }
+        ]
       },
       "datasource": {
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "An entry in the memory pool monitoring table",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1300,7 +1311,7 @@
         {
           "alias": "Memory Pool: $tag_memory_name",
           "hide": false,
-          "query": "SELECT (last(\"memory_used\")/(last(\"memory_free\") + last(\"memory_used\")))*100 FROM \"YOUR-NAME\" WHERE $timeFilter GROUP BY time($__interval), \"memory_name\" fill(none)",
+          "query": "SELECT (last(\"memory_used\")/(last(\"memory_free\") + last(\"memory_used\")))*100 FROM \"switch-core\" WHERE $timeFilter GROUP BY time($__interval), \"memory_name\" fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series"
@@ -1322,6 +1333,7 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "The total number of octets received and transmitted on the interface, including framing characters. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1361,8 +1373,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1388,7 +1399,9 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
@@ -1398,7 +1411,11 @@
       "pluginVersion": "7.5.2",
       "targets": [
         {
-          "alias": "$tag_description",
+          "alias": "$tag_ifName",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1416,7 +1433,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifInOctets\"), 1s) *8 FROM \"YOUR-NAME\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"description\" fill(none)",
+          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifInOctets\"), 1s) *8 FROM \"switch-core\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"ifName\" fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1437,7 +1454,7 @@
           "tags": []
         }
       ],
-      "title": "I/O Data Rate (IN)",
+      "title": "Data Rate (IN)",
       "transformations": [],
       "type": "timeseries"
     },
@@ -1485,8 +1502,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1512,7 +1528,9 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
@@ -1522,7 +1540,11 @@
       "pluginVersion": "7.5.2",
       "targets": [
         {
-          "alias": "$tag_description",
+          "alias": "$tag_ifName",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
           "groupBy": [
             {
               "params": [
@@ -1540,7 +1562,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifOutOctets\"), 1s) *8 FROM \"YOUR-NAME\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"description\" fill(none)",
+          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifOutOctets\"), 1s) *8 FROM \"switch-core\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"ifName\" fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1561,7 +1583,7 @@
           "tags": []
         }
       ],
-      "title": "I/O Data Rate (OUT)",
+      "title": "Data Rate (OUT)",
       "type": "timeseries"
     },
     {
@@ -1569,451 +1591,347 @@
         "type": "influxdb",
         "uid": "${DS_INFLUXDB-NETWORK}"
       },
+      "description": "An entry containing management information applicable to a particular interface",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
           "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "align": "auto",
+            "displayMode": "auto",
+            "filterable": true,
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+                "color": "green"
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
-              "options": "CPU"
+              "options": "Status"
             },
             "properties": [
               {
-                "id": "color",
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "color": "dark-green",
+                        "index": 0,
+                        "text": "up"
+                      },
+                      "2": {
+                        "color": "dark-red",
+                        "index": 1,
+                        "text": "down"
+                      },
+                      "3": {
+                        "color": "dark-orange",
+                        "index": 2,
+                        "text": "testing"
+                      },
+                      "4": {
+                        "color": "dark-red",
+                        "index": 3,
+                        "text": "unknown"
+                      },
+                      "5": {
+                        "color": "dark-red",
+                        "index": 4,
+                        "text": "dormant"
+                      },
+                      "6": {
+                        "color": "dark-red",
+                        "index": 5,
+                        "text": "not present"
+                      },
+                      "7": {
+                        "color": "dark-red",
+                        "index": 6,
+                        "text": "lower layer down"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Bandwidth (Max)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bps"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
                 "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red"
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 100000000
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 1000000000
+                    }
+                  ]
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 148
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "In Errors"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green"
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Out Errors"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green"
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Type"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "index": 0,
+                        "text": "other"
+                      },
+                      "6": {
+                        "index": 1,
+                        "text": "ethernetCsmacd"
+                      },
+                      "24": {
+                        "index": 2,
+                        "text": "softwareLoopback"
+                      },
+                      "53": {
+                        "index": 3,
+                        "text": "propVirtual"
+                      },
+                      "135": {
+                        "index": 4,
+                        "text": "l2vlan"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 202
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Alias"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 387
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 178
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Index"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Network Mask"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 188
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "IP Address"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 196
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 39
-      },
-      "id": 46,
-      "options": {
-        "legend": {
-          "calcs": [
-            "min",
-            "max",
-            "mean",
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.5",
-      "targets": [
-        {
-          "alias": "$col",
-          "hide": false,
-          "query": "SELECT mean(ifInErrors) as \"In\", mean(ifOutErrors) as \"Out\" FROM \"YOUR-NAME\" WHERE  $timeFilter GROUP BY time(1m) fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series"
-        }
-      ],
-      "title": "Errors",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${DS_INFLUXDB-NETWORK}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 39
-      },
-      "id": 47,
-      "options": {
-        "legend": {
-          "calcs": [
-            "min",
-            "max",
-            "mean",
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.5",
-      "targets": [
-        {
-          "alias": "$col",
-          "hide": false,
-          "query": "SELECT mean(ifInDiscards) as \"In\", mean(ifOutDiscards) as \"Out\" FROM \"YOUR-NAME\" WHERE  $timeFilter GROUP BY time(1m) fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series"
-        }
-      ],
-      "title": "Discards",
-      "type": "timeseries"
-    },
-    {
-      "columns": [],
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${DS_INFLUXDB-NETWORK}"
-      },
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 22,
+        "h": 18,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 39
       },
       "id": 40,
       "links": [],
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": false
+      "options": {
+        "footer": {
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Name"
+          }
+        ]
       },
-      "styles": [
-        {
-          "$$hashKey": "object:502",
-          "alias": "Status",
-          "align": "auto",
-          "colorMode": "value",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 1,
-          "pattern": "Status",
-          "thresholds": [
-            "2",
-            "2"
-          ],
-          "type": "string",
-          "unit": "short",
-          "valueMaps": [
-            {
-              "$$hashKey": "object:604",
-              "text": "up",
-              "value": "1"
-            },
-            {
-              "$$hashKey": "object:605",
-              "text": "down",
-              "value": "2"
-            },
-            {
-              "$$hashKey": "object:606",
-              "text": "testing",
-              "value": "3"
-            },
-            {
-              "$$hashKey": "object:607",
-              "text": "unknown",
-              "value": "4"
-            },
-            {
-              "$$hashKey": "object:608",
-              "text": "dormant",
-              "value": "5"
-            },
-            {
-              "$$hashKey": "object:609",
-              "text": "not present",
-              "value": "6"
-            },
-            {
-              "$$hashKey": "object:610",
-              "text": "lower layer down",
-              "value": "7"
-            }
-          ]
-        },
-        {
-          "$$hashKey": "object:503",
-          "alias": "Speed",
-          "align": "auto",
-          "colorMode": "value",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 1,
-          "pattern": "Speed",
-          "thresholds": [
-            "100000000",
-            "1000000000"
-          ],
-          "type": "number",
-          "unit": "bps"
-        },
-        {
-          "$$hashKey": "object:504",
-          "alias": "In Errors",
-          "align": "auto",
-          "colorMode": "value",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 1,
-          "pattern": "InErrors",
-          "thresholds": [
-            "1",
-            "1"
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:505",
-          "alias": "Out Errors",
-          "align": "auto",
-          "colorMode": "value",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 1,
-          "pattern": "OutErrors",
-          "thresholds": [
-            "1",
-            "1"
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:506",
-          "alias": "Transmitted",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Transmitted",
-          "thresholds": [],
-          "type": "number",
-          "unit": "decbytes"
-        },
-        {
-          "$$hashKey": "object:507",
-          "alias": "Last Change",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "LastChange",
-          "thresholds": [],
-          "type": "number",
-          "unit": "s"
-        },
-        {
-          "$$hashKey": "object:4309",
-          "alias": "In Discards",
-          "align": "auto",
-          "colorMode": "value",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 1,
-          "pattern": "InDiscards",
-          "thresholds": [
-            "1",
-            "1"
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:4353",
-          "alias": "Out Discards",
-          "align": "auto",
-          "colorMode": "value",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 1,
-          "pattern": "OutDiscards",
-          "thresholds": [
-            "1",
-            "1"
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:2722",
-          "alias": "Port",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "mappingType": 1,
-          "pattern": "index",
-          "thresholds": [],
-          "type": "number",
-          "unit": "none"
-        }
-      ],
+      "pluginVersion": "8.5.4",
       "targets": [
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2028,10 +1946,10 @@
               "type": "fill"
             }
           ],
-          "hide": false,
+          "hide": true,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"ifOperStatus\") AS \"Status\", last(\"description\") AS \"Interface\", last(\"alias\") AS Alias, last(\"ifSpeed\") AS \"Speed\", last(\"ifLastChange\") / 100 AS \"LastChange\", last(\"ifInErrors\") AS \"InErrors\", last(\"ifOutErrors\") AS \"OutErrors\", last(\"ifInDiscards\") AS \"InDiscards\", last(\"ifOutDiscards\") AS \"OutDiscards\", last(\"ifInOctets\") + last(\"ifOutOctets\") AS \"Transmitted\", last(\"ifPhysAddress\") AS \"MAC Address\" FROM \"YOUR-NAME\" WHERE  $timeFilter GROUP BY \"index\"",
+          "query": "SELECT last(\"ifOperStatus\"), last(\"ifAlias\"), last(\"ifHighSpeed\")*1000000, last(\"ifInErrors\"), last(\"ifOutErrors\") FROM \"switch-core\" WHERE  $timeFilter GROUP BY \"ifIndex\", \"ifName\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -2052,6 +1970,10 @@
           "tags": []
         },
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
           "groupBy": [
             {
               "params": [
@@ -2069,7 +1991,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"ip\") AS \"IP Address\", last(\"net_mask\") AS \"Net Mask\" FROM \"YOUR-NAME\" WHERE  $timeFilter GROUP BY \"index\"",
+          "query": "SELECT last(\"ip\") AS \"IP Address\", last(\"net_mask\") AS \"Net Mask\" FROM \"switch-core\" WHERE  $timeFilter GROUP BY \"ifIndex\"",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "table",
@@ -2088,15 +2010,121 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "ifIndex"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "ifName"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "switch-core",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "ifAlias"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "ifHighSpeed"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  " *1000000"
+                ],
+                "type": "math"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "ifInErrors"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "ifOperStatus"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "ifOutErrors"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "ifType"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Port Summary",
-      "transform": "table",
       "transformations": [
         {
           "id": "seriesToColumns",
           "options": {
-            "byField": "index"
+            "byField": "ifIndex"
           }
         },
         {
@@ -2107,36 +2135,1160 @@
               "Time 2": true
             },
             "indexByName": {
-              "Alias": 4,
-              "IP Address": 13,
-              "InDiscards": 10,
-              "InErrors": 7,
-              "Interface": 0,
-              "LastChange": 6,
-              "MAC Address": 15,
-              "Net Mask": 14,
-              "OutDiscards": 11,
-              "OutErrors": 8,
-              "Speed": 5,
-              "Status": 3,
-              "Time 1": 2,
-              "Time 2": 12,
-              "Transmitted": 9,
-              "index": 1
+              "IP Address": 4,
+              "Net Mask": 5,
+              "Time 1": 6,
+              "Time 2": 7,
+              "ifIndex": 1,
+              "ifName": 0,
+              "last": 2,
+              "last_1": 8,
+              "last_2": 10,
+              "last_3": 3,
+              "last_4": 11,
+              "last_5": 9
             },
             "renameByName": {
+              "IP Address": "IP Address",
               "Interface": "",
-              "Net Mask": "",
-              "index": ""
+              "Net Mask": "Network Mask",
+              "Time 1": "",
+              "dd": "Status",
+              "ifIndex": "Index",
+              "ifName": "Name",
+              "index": "",
+              "last": "Alias",
+              "last_1": "Bandwidth (Max)",
+              "last_2": "In Errors",
+              "last_3": "Status",
+              "last_4": "Out Errors",
+              "last_5": "Type",
+              "last_last": "Transmitted"
             }
           }
         }
       ],
-      "type": "table-old"
+      "type": "table"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 57
+      },
+      "id": 55,
+      "title": "Stackwise",
+      "type": "row"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                4
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          },
+          {
+            "evaluator": {
+              "params": [
+                4
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "or"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "keep_state",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "Switch Core / Switch Info alert",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "NQFdum6Zk"
+          }
+        ]
+      },
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-NETWORK}"
+      },
+      "description": "A conceptual row in the cswSwitchInfoTable describing a switch information.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "color": "dark-red",
+                        "index": 0,
+                        "text": "waiting"
+                      },
+                      "2": {
+                        "color": "dark-red",
+                        "index": 1,
+                        "text": "progressing"
+                      },
+                      "3": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "added"
+                      },
+                      "4": {
+                        "color": "dark-green",
+                        "index": 3,
+                        "text": "ready"
+                      },
+                      "5": {
+                        "color": "dark-red",
+                        "index": 4,
+                        "text": "sdmMismatch"
+                      },
+                      "6": {
+                        "color": "dark-red",
+                        "index": 5,
+                        "text": "verMismatch"
+                      },
+                      "7": {
+                        "color": "dark-red",
+                        "index": 6,
+                        "text": "featureMismatch"
+                      },
+                      "8": {
+                        "color": "dark-red",
+                        "index": 7,
+                        "text": "newMasterInit"
+                      },
+                      "9": {
+                        "color": "dark-red",
+                        "index": 8,
+                        "text": "provisioned"
+                      },
+                      "10": {
+                        "color": "dark-red",
+                        "index": 9,
+                        "text": "invalid"
+                      },
+                      "11": {
+                        "color": "dark-red",
+                        "index": 10,
+                        "text": "removed"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 58
+      },
+      "id": 59,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.4",
+      "targets": [
+        {
+          "alias": "Switch Number: $tag_switch_num_current",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "switch_num_current"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "switch-core",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "switch_state"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "gt",
+          "value": 4,
+          "visible": true
+        }
+      ],
+      "title": "Switch Info",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-NETWORK}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Switch Role"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "index": 0,
+                        "text": "master"
+                      },
+                      "2": {
+                        "index": 1,
+                        "text": "member"
+                      },
+                      "3": {
+                        "index": 2,
+                        "text": "notMember"
+                      },
+                      "4": {
+                        "index": 3,
+                        "text": "standby"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Switch State"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "color": "dark-red",
+                        "index": 0,
+                        "text": "waiting"
+                      },
+                      "2": {
+                        "color": "dark-red",
+                        "index": 1,
+                        "text": "progressing"
+                      },
+                      "3": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "added"
+                      },
+                      "4": {
+                        "color": "dark-green",
+                        "index": 3,
+                        "text": "ready"
+                      },
+                      "5": {
+                        "color": "dark-red",
+                        "index": 4,
+                        "text": "sdmMismatch"
+                      },
+                      "6": {
+                        "color": "dark-red",
+                        "index": 5,
+                        "text": "verMismatch"
+                      },
+                      "7": {
+                        "color": "dark-red",
+                        "index": 6,
+                        "text": "featureMismatch"
+                      },
+                      "8": {
+                        "color": "dark-red",
+                        "index": 7,
+                        "text": "newMasterInit"
+                      },
+                      "9": {
+                        "color": "dark-red",
+                        "index": 8,
+                        "text": "provisioned"
+                      },
+                      "10": {
+                        "color": "dark-red",
+                        "index": 9,
+                        "text": "invalid"
+                      },
+                      "11": {
+                        "color": "dark-red",
+                        "index": 10,
+                        "text": "removed"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 62,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "8.5.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "switch_num_current"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "switch-core",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "switch_role"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "switch_state"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "switch_power_budget"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "switch_power_allocated"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "last",
+                "last_1",
+                "last_2",
+                "last_3",
+                "switch_num_current"
+              ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "last": 1,
+              "last_1": 4,
+              "last_2": 2,
+              "last_3": 3,
+              "switch_num_current": 0
+            },
+            "renameByName": {
+              "last": "Switch Role",
+              "last_1": "Switch State",
+              "last_2": "Switch Power Budget",
+              "last_3": "Switch Power Allocated",
+              "switch-num-current": "Switch Num Current",
+              "switch_num_current": "Switch Num Current"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "keep_state",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "Switch Core / Stack Port Info alert",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "NQFdum6Zk"
+          }
+        ]
+      },
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-NETWORK}"
+      },
+      "description": "A conceptual row in the cswStackPortInfoTable. An entry contains information about a stackport",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "color": "dark-green",
+                        "index": 0,
+                        "text": "up"
+                      },
+                      "2": {
+                        "color": "dark-red",
+                        "index": 1,
+                        "text": "down"
+                      },
+                      "3": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "forcedDown"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 62
+      },
+      "id": 60,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.4",
+      "targets": [
+        {
+          "alias": "Stack Port: $tag_index",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "index"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "switch-core",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "stack_port_oper_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "gt",
+          "value": 1,
+          "visible": true
+        }
+      ],
+      "title": "Stack Port Info",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-NETWORK}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stack Port Oper Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "color": "dark-green",
+                        "index": 0,
+                        "text": "up"
+                      },
+                      "2": {
+                        "color": "dark-red",
+                        "index": 1,
+                        "text": "down"
+                      },
+                      "3": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "forcedDown"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "id": 63,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "8.5.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "index"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "switch-core",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "stack_port_neighbor"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "stack_port_oper_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "last",
+                "last_1",
+                "index"
+              ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "index": "Index",
+              "last": "Stack Port Neighbor",
+              "last_1": "Stack Port Oper Status",
+              "last_2": "Switch Power Budget",
+              "last_3": "Switch Power Allocated",
+              "switch-num-current": "Switch Num Current"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-NETWORK}"
+      },
+      "description": "An entry in the cswStackPowerInfoTable for each of the power stacks in a single data stack. This entry contains information regarding the power stack",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stack Power Mode"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "index": 0,
+                        "text": "powerSharing"
+                      },
+                      "2": {
+                        "index": 1,
+                        "text": "redundant"
+                      },
+                      "3": {
+                        "index": 2,
+                        "text": "powerSharingStrict"
+                      },
+                      "4": {
+                        "index": 3,
+                        "text": "redundantStrict"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stack Power Type"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "index": 0,
+                        "text": "ring"
+                      },
+                      "2": {
+                        "index": 1,
+                        "text": "star"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 68
+      },
+      "id": 61,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "8.5.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-NETWORK}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "index"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "switch-core",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "stack_power_mode"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "stack_power_type"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "stack_power_name"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Stack Power Info",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "last",
+                "last_1",
+                "last_2"
+              ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "last": 2,
+              "last_1": 1,
+              "last_2": 0
+            },
+            "renameByName": {
+              "last": "Stack Power Mode",
+              "last_1": "Stack Power Type",
+              "last_2": "Stack Power Name",
+              "last_3": "Switch Power Allocated",
+              "switch-num-current": "Switch Num Current"
+            }
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 35,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -2161,8 +3313,8 @@
     ]
   },
   "timezone": "",
-  "title": "Switch and Router",
-  "uid": "switch-router",
-  "version": 1,
+  "title": "Switch Core",
+  "uid": "switch-core",
+  "version": 8,
   "weekStart": ""
 }
