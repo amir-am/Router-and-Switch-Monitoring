@@ -147,7 +147,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"uptime\") FROM \"snmp\" WHERE (\"host\" = 'telegraf') AND $timeFilter GROUP BY time(1m), \"hostname\" fill(null)",
@@ -248,7 +248,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"uptime\") FROM \"snmp\" WHERE (\"host\" = 'telegraf') AND $timeFilter GROUP BY time(1m), \"hostname\" fill(null)",
@@ -428,7 +428,7 @@
             }
           ],
           "hide": false,
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
@@ -605,7 +605,7 @@
             }
           ],
           "hide": false,
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
@@ -795,7 +795,7 @@
             }
           ],
           "hide": false,
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
@@ -914,7 +914,7 @@
           "groupBy": [],
           "hide": false,
           "limit": "",
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT last(\"os_version\") FROM \"Afranet-R5_interfaces\" WHERE $timeFilter GROUP BY \"hostname\"",
@@ -1136,7 +1136,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1311,7 +1311,7 @@
         {
           "alias": "Memory Pool: $tag_memory_name",
           "hide": false,
-          "query": "SELECT (last(\"memory_used\")/(last(\"memory_free\") + last(\"memory_used\")))*100 FROM \"switch-core\" WHERE $timeFilter GROUP BY time($__interval), \"memory_name\" fill(none)",
+          "query": "SELECT (last(\"memory_used\")/(last(\"memory_free\") + last(\"memory_used\")))*100 FROM \"YOUR-NAME\" WHERE $timeFilter GROUP BY time($__interval), \"memory_name\" fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series"
@@ -1433,7 +1433,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifInOctets\"), 1s) *8 FROM \"switch-core\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"ifName\" fill(none)",
+          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifInOctets\"), 1s) *8 FROM \"YOUR-NAME\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"ifName\" fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1562,7 +1562,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifOutOctets\"), 1s) *8 FROM \"switch-core\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"ifName\" fill(none)",
+          "query": "SELECT  NON_NEGATIVE_DERIVATIVE(last(\"ifOutOctets\"), 1s) *8 FROM \"YOUR-NAME\" WHERE (\"ifOperStatus\"=1) AND $timeFilter GROUP BY time($__interval), \"ifName\" fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1949,7 +1949,7 @@
           "hide": true,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"ifOperStatus\"), last(\"ifAlias\"), last(\"ifHighSpeed\")*1000000, last(\"ifInErrors\"), last(\"ifOutErrors\") FROM \"switch-core\" WHERE  $timeFilter GROUP BY \"ifIndex\", \"ifName\"",
+          "query": "SELECT last(\"ifOperStatus\"), last(\"ifAlias\"), last(\"ifHighSpeed\")*1000000, last(\"ifInErrors\"), last(\"ifOutErrors\") FROM \"YOUR-NAME\" WHERE  $timeFilter GROUP BY \"ifIndex\", \"ifName\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -1991,7 +1991,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"ip\") AS \"IP Address\", last(\"net_mask\") AS \"Net Mask\" FROM \"switch-core\" WHERE  $timeFilter GROUP BY \"ifIndex\"",
+          "query": "SELECT last(\"ip\") AS \"IP Address\", last(\"net_mask\") AS \"Net Mask\" FROM \"YOUR-NAME\" WHERE  $timeFilter GROUP BY \"ifIndex\"",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "table",
@@ -2031,7 +2031,7 @@
             }
           ],
           "hide": false,
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -2414,7 +2414,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -2620,7 +2620,7 @@
               "type": "tag"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -2887,7 +2887,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -3019,7 +3019,7 @@
               "type": "tag"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -3205,7 +3205,7 @@
               "type": "tag"
             }
           ],
-          "measurement": "switch-core",
+          "measurement": "YOUR-NAME",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -3314,7 +3314,7 @@
   },
   "timezone": "",
   "title": "Switch Core",
-  "uid": "switch-core",
-  "version": 8,
+  "uid": "YOUR-NAME",
+  "version": 1,
   "weekStart": ""
 }
