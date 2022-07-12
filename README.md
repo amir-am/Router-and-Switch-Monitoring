@@ -4,6 +4,7 @@ In order to control the performance of a project and maintain its status, it is 
 
 It should be noted that the SNMP V3 protocol has been used to monitor these devices over Grafana platform.
 
+
 The mentioned dashboard includes the following item:
 - Hostname
 - Uptime
@@ -21,6 +22,7 @@ Stackwise [Switches Only]
 - Stack Port Info (Index, Neighbor, Oper Status)
 - Stack Power Info (Name, Type, Mode)
 
+
 In the pictures below, you can see the dashboard visualizations:
 
 ![image](https://user-images.githubusercontent.com/43276746/178444483-7cf863a2-3af5-4c9b-bfdd-bb367a5f4854.png)
@@ -32,6 +34,7 @@ In the pictures below, you can see the dashboard visualizations:
 Requirements:
 - Grafana: https://grafana.com/grafana/download
 - InfluxDB & Telegraf: https://portal.influxdata.com/downloads/
+
 
 Remember:
 - At first you need to apply your informations in both of dashoboard and configuration (YOUR-IP, YOUR-NAME, USERNAME, YOUR-AUTH-PASSWORD, YOUR-PRIV-PASSWORD)
